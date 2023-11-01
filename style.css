@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgb(25, 25, 25);
+    background-image:
+        radial-gradient(at 40% 20%, rgb(0, 0, 0) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgb(0, 0, 0) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgb(0, 0, 0) 0px, transparent 50%),
+        radial-gradient(at 80% 50%, rgb(0, 0, 0) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgb(0, 0, 0) 0px, transparent 50%),
+        radial-gradient(at 80% 100%, rgb(0, 0, 0) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, rgb(0, 0, 0) 0px, transparent 50%);
+}
+
+.container{
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 20px 30px;
+    border: 2px solid #ff00007e;
+    text-align: center;
+    min-width: 400px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    box-shadow: 0 4px 30px rgba(97, 97, 97, 0.1);
+}
+
+.container i{
+    font-size: 100px;
+    margin-bottom: 10px;
+}
+
+.videos {
+    border-radius: 10px;
+    padding: 10px 0.5px;
+    border: 2px solid #000;
+    text-align: center;
+    min-width: 360;
+}
+
+video {
+    width: 180px; /* Defina a largura desejada */
+    height: 360px; /* Defina a altura desejada */
+    max-width: 100%; /* Garante que o vídeo não seja maior que a largura da janela */
+    max-height: 100%; /* Garante que o vídeo não seja mais alto que a altura da janela */
+}
+
+h1{
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.buttons{
+    display: flex;
+    gap: 10px;
+}
+
+button{
+    width: 100%;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 500;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover{
+    background-color: #000;
+    color: #fff;
+}
