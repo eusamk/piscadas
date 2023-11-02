@@ -3,6 +3,7 @@ const changeVideoButton = document.getElementById("changeVideo");
 const viewCountElement = document.getElementById("viewCount");
 const noVideoText = document.getElementById("noVideoText");
 
+const videoFolder = "/piscadas"; // Pasta onde estão os vídeos
 const videoFiles = ["PiscadaSolidaria.mp4", "PiscadaCrista.mp4", "PiscadaCORINTHIANS.mp4", "ComboPiscadas.mp4", "PiscadaCuradoura.mp4", "PiscadaGringa.mp4", "PiscadaORGULHOSA.mp4", "PiscadaSULISTA.mp4","PiscadaLenta.mp4", "PiscadaMedicinal.mp4"]; // Lista de nomes dos vídeos
 
 let currentVideoIndex = 0;
