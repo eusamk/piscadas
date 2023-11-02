@@ -83,3 +83,30 @@ button:hover{
     background-color: #000;
     color: #fff;
 }
+
+#videoPlayer {
+    display: block;
+    margin: 0 auto;
+}
+
+#changeVideo {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+#viewCount {
+    margin-top: 10px;
+}
+
+#noVideoText {
+    display: block; /* Inicialmente, o texto é exibido */
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.video-playing #noVideoText {
+    display: none; /* Quando um vídeo está sendo reproduzido, o texto é ocultado */
+}
