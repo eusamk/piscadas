@@ -1,30 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Gerar Piscadas - Blink</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Converter Lista Xtream para JSON</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+    h1 { color: #333; }
+    input, button { padding: 8px; margin: 10px 0; width: 100%; }
+    textarea { width: 100%; height: 300px; margin-top: 10px; }
+  </style>
 </head>
-
 <body>
-<div class="background">
-    <div class="container"
-    <i class="bx bx-link-alt"></i>
-        <h1>Gerador de Piscadas</h1>
-        <p id="viewCount">Você assistiu a 0 piscadas hoje.</p>
-        <div class="videos">
-            <p id="noVideoText">Aperte o botão abaixo e gere uma piscada</p>
-        <video id="videoPlayer" controls autoplay>
-            <source src="" type="video/mp4">
-        </video>
-        </div>
-        <button id="changeVideo">Gerar Piscada</button>
-    </div>
- 
-    <script src="script.js"></script>
-</div>
-</body>
 
+  <h1>Converter Lista Xtream para JSON</h1>
+  
+  <button onclick="baixarJson()">Baixar JSON</button>
+
+  <textarea id="output" readonly placeholder="O JSON gerado aparecerá aqui..."></textarea>
+
+  <script>
+    async function baixarJson() {
+      const url = 'http://techon:80/get.php?username=15127130&password=050940056';
+      
+      try {
+        // Fazendo o fetch da lista M3U
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Erro ao carregar o arquivo M3U');
+
+        const m3uData = await res.text();
+        const jsonResult = m3uParaJson(m3uData);
+
+        // Exibindo o JSON gerado
+        document.getElementById('output').value = JSON.stringify(jsonResult, null, 2);
+
+        // Criando o arquivo .json para download
+        const blob = new Blob([JSON.stringify(jsonResult, null, 2)], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'lista_xtream.json';
+        link.click();
+      } catch (error) {
+        alert('Erro: ' + error.message);
+      }
+    }
+
+    function m3uParaJson(m3uData) {
+      const lines = m3uData.split('\n');
+      const result = [];
+      let currentStream = null;
+
+      lines.forEach(line => {
+        line = line.trim();
+        if (line.startsWith('#EXTINF:')) {
+          // Parâmetros dos canais
+          const parts = line.slice(8).split(',');
+          const title = parts[0].trim();
+          const duration = parts[1] ? parts[1].trim() : '0';
+
+          currentStream = {
+            title: title,
+            duration: duration,
+            url: ''
+          };
+        }
+        if (line && !line.startsWith('#')) {
+          // URL do canal
+          if (currentStream) {
+            currentStream.url = line.trim();
+            result.push(currentStream);
+            currentStream = null; // Resetando para o próximo
+          }
+        }
+      });
+
+      return result;
+    }
+  </script>
+
+</body>
 </html>
